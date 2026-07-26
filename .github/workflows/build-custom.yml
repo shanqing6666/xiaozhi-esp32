@@ -1,0 +1,32 @@
+name: Build Custom Robot
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'main/boards/custom-robot/**'
+
+jobs:
+  build:
+    name: Build custom-robot
+    runs-on: ubuntu-latest
+    container:
+      image: espressif/idf:v6.0.1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build firmware
+        run: |
+          . $IDF_PATH/export.sh
+          idf.py set-target esp32s3
+          cat > sdkconfig << 'SDKEOF'
+$(cat sdkconfig.defaults.esp32s3)
+CONFIG_BOARD_TYPE_CUSTOM_ROBOT=y
+CONFIG_LCD_GC9A01_240X240=y
+SDKEOF
+          idf.py build
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: custom-robot-firmware
+          path: build/xiaozhi.bin
