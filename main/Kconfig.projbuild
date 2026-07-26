@@ -144,6 +144,9 @@ choice BOARD_TYPE
     config BOARD_TYPE_BREAD_COMPACT_ESP32_LCD
         bool "Bread Compact ESP32 DevKit + LCD (面包板)"
         depends on IDF_TARGET_ESP32
+    config BOARD_TYPE_CUSTOM_ROBOT
+        bool "Custom Robot GC9A01 + MAX98357 + ASR-PRO (自定义机器人)"
+        depends on IDF_TARGET_ESP32S3
     config BOARD_TYPE_XMINI_C3_V3
         bool "Xmini C3 V3"
         depends on IDF_TARGET_ESP32C3
