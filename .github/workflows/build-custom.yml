@@ -20,3 +20,4 @@ jobs:
           name: custom-robot-firmware
           path: build/merged-binary.bin
           if-no-files-found: error
+
